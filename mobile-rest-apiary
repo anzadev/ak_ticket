@@ -10,17 +10,20 @@ Resources in this groups are related to **Register** authors.
 
 ## Register [/register/validate/]
 
-### Validate Email [POST /register/validate/email]
+### User Register Validate Email [POST /register/validate/email]
 
 + Attributes
 
-    + email: pape@gmail.com (string) - Email user
-    
-+ Response 200 (application/json)
+    + email: john@appleseed.com (string) - Author of the blog post
+
++ Request (application/json)
 
     + Body
 
-            {"email": "pape@gmail.com"}
+            {
+                "email": "john@appleseed.com"
+            }
+
 
 + Response 200 (application/json)
 
@@ -35,7 +38,7 @@ Resources in this groups are related to **Register** authors.
 + Attributes
 
     + message (string) - The blog post article
-    + author: john@appleseed.com (string) - Author of the blog post
+    + email: john@appleseed.com (string) - Author of the blog post
 
 + Request (application/json)
 
@@ -213,7 +216,7 @@ Resources in this groups are related to **Auth** authors.
                 }
             }
 
-### Detail User [GET /user/tickets]
+### Detail User Ticket History [GET /user/tickets]
 
 + Response 200 (application/json)
 
@@ -262,5 +265,168 @@ Resources in this groups are related to **Auth** authors.
                         "qrcode": "https://ak23-ticket.com/queue/qrcode/19112355"
                     }
                 ]
+            }
+
+# Group Master Data
+Resources in this groups are related to **Master Data** Application.
+
+## Master Data [/master/data]
+
+### Polda [GET /master/data/polda]
+
++ Response 200 (application/json)
+
+            {
+                "code": 200,
+                "message": "success",
+                "data": [
+                    {
+                        "id": 1,
+                        "province_id": 1,
+                        "province": "Jakarta Pusat",
+                        "polda": "Polda Metro Jaya"
+                    },
+                    {
+                        "id": 2,
+                        "province_id": 2,
+                        "province": "Sumatera Utara",
+                        "polda": "Medan"
+                    }
+                    ,
+                    {
+                        "id": 3,
+                        "province_id": 3,
+                        "province": "Kalimantan Barat",
+                        "polda": "Pontianak"
+                    }
+                ]
+            }
+            
+### Sinyalement [GET /master/data/sinyalement]
+
++ Response 200 (application/json)
+
+            {
+                "code": 200,
+                "message": "success",
+                "data": {
+                    "skin_color" : [{"id":1, "value":"white"}, {"id":2, "value":"black"}],
+                    "hair_color" : [{"id":1, "value":"white"}, {"id":2, "value":"black"}],
+                    "hair_type" : [{"id":1, "value":"white"}, {"id":2, "value":"black"}],
+                    "eyes_color" : [{"id":1, "value":"white"}, {"id":2, "value":"black"}],
+                    "eyes" :  [{"id":1, "value":"white"}, {"id":2, "value":"black"}],
+                    "tooth" :  [{"id":1, "value":"white"}, {"id":2, "value":"black"}],
+                    "body" :  [{"id":1, "value":"white"}, {"id":2, "value":"black"}],
+                    "face_type" :  [{"id":1, "value":"white"}, {"id":2, "value":"black"}],
+                    "head_type" :  [{"id":1, "value":"white"}, {"id":2, "value":"black"}],
+                    "forehead_type" :  [{"id":1, "value":"white"}, {"id":2, "value":"black"}],
+                    "nose_type" :  [{"id":1, "value":"white"}, {"id":2, "value":"black"}],
+                    "lips_type" :  [{"id":1, "value":"white"}, {"id":2, "value":"black"}],
+                    "chin_type" :  [{"id":1, "value":"white"}, {"id":2, "value":"black"}],
+                    "ear_type":  [{"id":1, "value":"white"}, {"id":2, "value":"black"}]
+                }
+            }
+
+# Group Ticket Data
+Resources in this groups are related to **Master Data** Application.
+
+## Ticket [/ticket]
+
+### Create Liveness [GET /ticket/liveness]
+
++ Attributes
+    + face: imageBase64 (string) - photo image base64
+
++ Request (application/json)
+
+    + Body
+
+            {
+                "face": "iVBORw0KGgoAAAANSUhEUgAABLgAAAJOCAYAAAC0vr5oAAAMPmlDQ1BJQ0MgUHJvZmlsZQAASImVVwdYU8kWnluSkEBCCSAgJfQmSCeAlBBaAOlFsBGSAKHEGAgqdnRRwbWLBWzoqohiB8SO2FkEe18sCCjrYsGuvEkBXfeV753vm3v"
+            }
+
++ Response 200 (application/json)
+
+            {
+                "code": 200,
+                "message": "success",
+                "data": {
+                    "liveness": true
+                }
+            }
+
+### Create Ticket [GET /ticket/create]
+
++ Attributes
+    + ektp: imageBase64 (string) - photo image base64
+    + password_verify: xxx-pass.com (string) - password random character, min 8
+
++ Request (application/json)
+
+    + Body
+
+            {
+                "ektp": "iVBORw0KGgoAAAANSUhEUgAABLgAAAJOCAYAAAC0vr5oAAAMPmlDQ1BJQ0MgUHJvZmlsZQAASImVVwdYU8kWnluSkEBCCSAgJfQmSCeAlBBaAOlFsBGSAKHEGAgqdnRRwbWLBWzoqohiB8SO2FkEe18sCCjrYsGuvEkBXfeV753vm3v",
+                "schedule": {
+                    "polda_id": 1,
+                    "date": ""
+                },
+                "profile": {
+                    "nik": "3201234567890002",
+                    "name": "ADINDA PUTRI LESTARI",
+                    "pob": "JAKARTA",
+                    "bod": "29-02-1992",
+                    "sex": "PEREMPUAN",
+                    "rt": "001",
+                    "rw": "002",
+                    "village": "MALAKA SARI",
+                    "district": "DUREN SAWIT",
+                    "religion": "ISLAM",
+                    "marriage": "BELUM MENIKAH",
+                    "occupation": "KARYAWAN SWASTA",
+                    "address": "JALAN MALAKA SARI NO. 23 BLOK A",
+                    "nationality": "WNI",
+                    "other_data": {
+                        "nationality": "WNI",
+                        "ethnic": "Sunda",
+                        "passport": "123456789",
+                        "pendidikan": "S1",
+                        "father_name": "Odetia Saputri",
+                        "father_address": "JL. Brute Force Breastplate No 3",
+                        "mother_name": "Jhonson Barudin",
+                        "father_address": "JL. Athena shield No 5",
+                        "wife_name":  "Lesley",
+                        "husband_name": "Lapu-Lapu"
+                    },
+                    "sinyalement": {
+                        "skin_color": "Hitam",
+                        "hair_color": "Hitam",
+                        "hair_type": "Lempeng",
+                        "eyes_color": "Hitam",
+                        "eyes": "Normal",
+                        "tooth": "Teratur",
+                        "body": "Kurus",
+                        "face_type": "Lonjong",
+                        "head_type": "Datar Atas",
+                        "forehead_type": "Lengkung",
+                        "nose_type": "Lengkung",
+                        "lips_type": "Sedang",
+                        "chin_type": "Tajam",
+                        "ear_type": "Bulat",
+                        "height": 170,
+                        "weight": 170,
+                        "blood_type": "A"
+                        "tatto": "None"
+                        "handicaps": "None"
+                    }
+                }
+            }
+
++ Response 200 (application/json)
+
+            {
+                "code": 200,
+                "message": "success",
+                "data": null
             }
 
