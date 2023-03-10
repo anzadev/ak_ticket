@@ -1,0 +1,266 @@
+FORMAT: 1A
+HOST: https://polls.apiblueprint.org/
+
+# Ticket API
+Welcome to the **ACME Blog** API. This API provides access to the **ACME
+Blog** service.
+
+# Group Register
+Resources in this groups are related to **Register** authors.
+
+## Register [/register/validate/]
+
+### Validate Email [POST /register/validate/email]
+
++ Attributes
+
+    + email: pape@gmail.com (string) - Email user
+    
++ Response 200 (application/json)
+
+    + Body
+
+            {"email": "pape@gmail.com"}
+
++ Response 200 (application/json)
+
+            {
+                "code": 200,
+                "message": "success",
+                "data": null
+            }
+
+### User Register [POST /register/user]
+
++ Attributes
+
+    + message (string) - The blog post article
+    + author: john@appleseed.com (string) - Author of the blog post
+
++ Request (application/json)
+
+    + Body
+
+            {
+                "email": "john@appleseed.com",
+                "password": "xxx-pass.com",
+                "password_verify": "xxx-pass.com",
+            }
+
++ Response 201 (application/json)
+
+            {
+                "code": 201,
+                "message": "success",
+                "data": null
+            }
+
+### User Register Validation Phone [POST /register/validate/phone]
+
++ Attributes
+
+    + phone (string) - user phone number
+
++ Request (application/json)
+
+    + Body
+
+            {
+                "phone": "08xxxxxxxxxx"
+            }
+
++ Request (application/yaml)
+
++ Response 200 (application/json)
+
+            {
+                "code": 200,
+                "message": "success",
+                "data": null
+            }
+
+### User Register Validation OTP [POST /register/validate/otp]
+
++ Attributes
+
+    + otp (string) - user phone number
+
++ Request (application/json)
+
+    + Body
+
+            {
+                "otp": "08xxxx"
+            }
+
++ Request (application/yaml)
+
++ Response 200 (application/json)
+
+            {
+                "code": 200,
+                "message": "success",
+                "data": null
+            }
+
+# Group Auth
+Resources in this groups are related to **Auth** authors.
+
+## Auth [/login]
+
+### Login [POST /login]
+
++ Attributes
+
+    + username: pape@gmail.com (string) - The username
+    + password: xxx-pass.com (string) - password random character, min 8
+    + player_id: xxx-xxx-xxx (string) - Get from Onesignal ID
+
++ Request (application/json)
+
+    + Body
+
+            {
+                "username": "pape@gmail.com",
+                "password": "xxx-pass.com",
+                "player_id": "xxx-xxx-xxx"
+            }
+
++ Response 200 (application/json)
+
+            {
+                "code": 200,
+                "message": "success",
+                "data": {
+                    "token": "randomstringtoken"
+                }
+            }
+
+### Forgot Password [POST /forgot/password]
+
++ Attributes
+
+    + username: pape@gmail.com (string) - The username
+
++ Request (application/json)
+
+    + Body
+
+            {
+                "username": "pape@gmail.com"
+            }
+
++ Response 200 (application/json)
+
+            {
+                "code": 200,
+                "message": "success",
+                "data": null
+            }
+
+### Update Password [POST /update/password]
+
++ Attributes
+    + password: xxx-pass.com (string) - password random character, min 8
+    + password_verify: xxx-pass.com (string) - password random character, min 8
+
++ Request (application/json)
+
+    + Body
+
+            {
+                "password": "pape@gmail.com",
+                "password_verify": "pape@gmail.com"
+            }
+
++ Response 200 (application/json)
+
+            {
+                "code": 200,
+                "message": "success",
+                "data": null
+            }
+
+# Group User
+Resources in this groups are related to **Auth** authors.
+
+## Detail User Information [/user/detail]
+
+### Detail User [GET /user/detail]
+
++ Response 200 (application/json)
+
+            {
+                "code": 200,
+                "message": "success",
+                "data": {
+                    "user": {
+                        "username": "",
+                        "email": "",
+                        "email": "",
+                    },
+                    "ticket": {
+                        "status": 1,
+                        "date": "2023-09-29T14:30:19-0700",
+                        "province_id": 1,
+                        "polda_id": 1,
+                        "province": "Jakarta Pusat",
+                        "polda": "Polda Metro Jaya",
+                        "queue": 500,
+                        "qrcode": "https://ak23-ticket.com/queue/qrcode/19112357"
+                    },
+                    "card" : "https://ak23-ticket.com/questions/19112357" 
+                }
+            }
+
+### Detail User [GET /user/tickets]
+
++ Response 200 (application/json)
+
+            {
+                "code": 200,
+                "message": "success",
+                "data": [
+                    {
+                        "status": 1,
+                        "date": "2023-09-29T14:30:19-0700",
+                        "province_id": 1,
+                        "polda_id": 1,
+                        "province": "Jakarta Pusat",
+                        "polda": "Polda Metro Jaya",
+                        "queue": 500,
+                        "qrcode": "https://ak23-ticket.com/queue/qrcode/19112357"
+                    },
+                    {
+                        "status": 0,
+                        "date": "2023-08-29T14:30:19-0700",
+                        "province_id": 1,
+                        "polda_id": 1,
+                        "province": "Jakarta Pusat",
+                        "polda": "Polda Metro Jaya",
+                        "queue": 99,
+                        "qrcode": "https://ak23-ticket.com/queue/qrcode/19112356"
+                    },
+                    {
+                        "status": 0,
+                        "date": "2023-07-29T14:30:19-0700",
+                        "province_id": 1,
+                        "polda_id": 1,
+                        "province": "Jakarta Pusat",
+                        "polda": "Polda Metro Jaya",
+                        "queue": 10,
+                        "qrcode": "https://ak23-ticket.com/queue/qrcode/19112355"
+                    },
+                    {
+                        "status": 0,
+                        "date": "2023-06-29T14:30:19-0700",
+                        "province_id": 1,
+                        "polda_id": 1,
+                        "province": "Jakarta Pusat",
+                        "polda": "Polda Metro Jaya",
+                        "queue": 117,
+                        "qrcode": "https://ak23-ticket.com/queue/qrcode/19112355"
+                    }
+                ]
+            }
+
