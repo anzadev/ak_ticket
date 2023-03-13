@@ -1,0 +1,425 @@
+FORMAT: 1A
+HOST: https://polls.apiblueprint.org/
+
+# Ticket Operator API
+
+Polls is a simple API allowing consumers to view polls and vote in them.
+
+# Group Auth
+Resources in this groups are related to **Auth** authors.
+
+## Auth [/login]
+
+### Login [POST /login]
+
++ Attributes
+
+    + username: pape@gmail.com (string) - The username
+    + password: xxx-pass.com (string) - password random character, min 8
+    + player_id: xxx-xxx-xxx (string) - Get from Onesignal ID
+
++ Request (application/json)
+
+    + Body
+
+            {
+                "username": "pape@gmail.com",
+                "password": "xxx-pass.com",
+                "player_id": "xxx-xxx-xxx"
+            }
+
++ Response 200 (application/json)
+
+            {
+                "code": 200,
+                "message": "success",
+                "data": {
+                    "role": "SUPER_ADMIN",
+                    "token": "randomstringtoken"
+                }
+            }
+            
+## Register [/register]
+
+### Register [POST /register]
+
++ Request (application/json)
+
+    + Body
+
+            {
+                "nik": "pape@gmail.com",
+                "nrp": "xxx-pass.com",
+                "name": "xxx-xxx-xxx",
+                "email": "xxx-xxx-xxx",
+                "phone": "xxx-xxx-xxx",
+                "polda_id": "xxx-xxx-xxx",
+                "polres_id": "xxx-xxx-xxx",
+                "password": "xxx-xxx-xxx",
+                "password_verify": "xxx-xxx-xxx",
+            }
+
++ Response 200 (application/json)
+
+            {
+                "code": 200,
+                "message": "success",
+                "data": {
+                    "token": "randomstringtoken"
+                }
+            }
+
+## Dashboard [/dashboard]
+
+### Dashboard [GET /dashboard]
+
++ Response 200 (application/json)
+
+            {
+                "code": 200,
+                "message": "success",
+                "data": {
+                    "instansi" : {
+                        "queue": 50,
+                    },
+                    "user": {
+                        "name": "Kombes Pol. Fahmi Wirawan W.",
+                        "instansi": "POLRES Jakarta Pusat",
+                        "address": "Blok 1, Jl. Garuda No.2, RW.4, Gn. Sahari Sel., Kec. Kemayoran, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10620"
+                    },
+                    "queue_sum": {
+                        "date" : "07 Maret 2023",
+                        "total_request": 40,
+                        "total_not_present": 10,
+                        "total_queue": 10,
+                        "total_process": 5,
+                        "total_finish": 15,
+                    },
+                    "queue_detail": {
+                        "date" : "07 Maret 2023",
+                        "not_present": [
+                            {
+                                "queue_no": "001",
+                                "nik": "3201234567890002",
+                                "name": "Shellvy Natalia",
+                                "sex": 1,
+                                "queue_status": 1
+                            }
+                        ],
+                        "queue": [
+                            {
+                                "queue_no": "002",
+                                "nik": "3201234567890002",
+                                "name": "FA. Nugroho",
+                                "sex": 1,
+                                "queue_status": 2
+                            }
+                        ],
+                        "process": [
+                            {
+                                "queue_no": "003",
+                                "nik": "3201234567890002",
+                                "name": "Akbar Hapis",
+                                "sex": 1,
+                                "queue_status": 3
+                            }
+                        ],
+                        "finish": [
+                            {
+                                "queue_no": "004",
+                                "nik": "3201234567890002",
+                                "name": "Irfan Anugrah",
+                                "sex": 1,
+                                "queue_status": 4
+                            }
+                        ],
+                    
+                    }
+                }
+            }
+
+## Configuration [/configuration]
+
+### Quita List [GET /configuration/quota]
+
++ Response 200 (application/json)
+
+            {
+                "code": 200,
+                "message": "success",
+                "data": [
+                    { 
+                        "year": 2023,
+                        "month": 1,
+                        "quota": 50
+                    },
+                    { 
+                        "year": 2023,
+                        "month": 2,
+                        "quota": 50
+                    },
+                    { 
+                        "year": 2023,
+                        "month": 3,
+                        "quota": 50
+                    },
+                    { 
+                        "year": 2023,
+                        "month": 4,
+                        "quota": 50
+                    },
+                    { 
+                        "year": 2023,
+                        "month": 5,
+                        "quota": 50
+                    },
+                    { 
+                        "year": 2023,
+                        "month": 6,
+                        "quota": 50
+                    }
+                ]
+            }
+
+### Quita Update [POST /configuration/quota]
+
++ Request (application/json)
+
+    + Body
+
+            { 
+                "year": 2023,
+                "month": 6,
+                "quota": 50
+            }
+
++ Response 200 (application/json)
+
+            {
+                "code": 200,
+                "message": "success",
+                "data": [
+                    { 
+                        "year": 2023,
+                        "month": 1,
+                        "quota": 50
+                    },
+                    { 
+                        "year": 2023,
+                        "month": 2,
+                        "quota": 50
+                    },
+                    { 
+                        "year": 2023,
+                        "month": 3,
+                        "quota": 50
+                    },
+                    { 
+                        "year": 2023,
+                        "month": 4,
+                        "quota": 50
+                    },
+                    { 
+                        "year": 2023,
+                        "month": 5,
+                        "quota": 50
+                    },
+                    { 
+                        "year": 2023,
+                        "month": 6,
+                        "quota": 50
+                    }
+                ]
+            }
+
+### Admin List [GET /configuration/admin]
+
++ Response 200 (application/json)
+
+            {
+                "code": 200,
+                "message": "success",
+                "data": [
+                    { 
+                        "photo": "",
+                        "nrp": "0123456789",
+                        "name": "Brigjen. Pol. Mashudi, S.I.K., S.H., M.Hum.",
+                        "email": "mashudi@inafis.com",
+                        "grade": "Brigadir Jenderal",
+                        "phone": "081212345678",
+                        "instansi": "PUSINAFIS",
+                        "last_active": "2023-03-13T04:47:46.388+00:00",
+                        "role_name": "Super Admin"
+                    },
+                ]
+            }
+
+### Admin Update Password [POST /configuration/admin]
+
++ Request (application/json)
+
+    + Body
+
+            { 
+                "password": "passtring"
+            }
+
++ Response 200 (application/json)
+
+            {
+                "code": 200,
+                "message": "success",
+                "data": [
+                    { 
+                        "photo": "",
+                        "nrp": "0123456789",
+                        "name": "Brigjen. Pol. Mashudi, S.I.K., S.H., M.Hum.",
+                        "email": "mashudi@inafis.com",
+                        "grade": "Brigadir Jenderal",
+                        "phone": "081212345678",
+                        "instansi": "PUSINAFIS",
+                        "last_active": "2023-03-13T04:47:46.388+00:00",
+                        "role_name": "Super Admin"
+                    },
+                ]
+            }
+
+## User AK23 Ticket [/user]
+
+### Quita List [GET /user]
+
++ Response 200 (application/json)
+
+            {
+                "code": 200,
+                "message": "success",
+                "data": [
+                    { 
+                        "id": 1,
+                        "nik": "3201234567890002",
+                        "name": "Brigjen. Pol. Mashudi, S.I.K., S.H., M.Hum.",
+                        "finger_id": "3201234567890002",
+                        "sex": "Brigadir Jenderal",
+                        "instansi": "PUSINAFIS",
+                        "last_active": "2023-03-13T04:47:46.388+00:00",
+                        "role_name": "Super Admin"
+                    },
+                ]
+            }
+
+### Quita Detail [GET /user/{id}]
+
++ Parameters
+    + id - A path variable that is required for a valid URL
+
++ Response 200 (application/json)
+
+            {
+                "code": 200,
+                "message": "success",
+                "data": {
+                    "profile": {
+                        "nik": "3201234567890002",
+                        "finger_id": "3201234567890002",
+                        "name": "ADINDA PUTRI LESTARI",
+                        "pob": "JAKARTA",
+                        "bod": "29-02-1992",
+                        "sex": "PEREMPUAN",
+                        "rt": "001",
+                        "rw": "002",
+                        "village": "MALAKA SARI",
+                        "district": "DUREN SAWIT",
+                        "religion": "ISLAM",
+                        "marriage": "BELUM MENIKAH",
+                        "occupation": "KARYAWAN SWASTA",
+                        "address": "JALAN MALAKA SARI NO. 23 BLOK A",
+                        "nationality": "WNI",
+                        "ethnic": "Sunda",
+                        "passport": "123456789",
+                        "pendidikan": "S1",
+                        "father_name": "Odetia Saputri",
+                        "father_address": "JL. Brute Force Breastplate No 3",
+                        "mother_name": "Jhonson Barudin",
+                        "father_address": "JL. Athena shield No 5",
+                        "wife_name":  "Lesley",
+                        "husband_name": "Lapu-Lapu",
+                        "finger": {
+                            "formula": {
+                            
+                            },
+                            "index": [
+                                {
+                                    "index": 1,
+                                    "image": "base64",
+                                },
+                                {
+                                    "index": 2,
+                                    "image": "base64",
+                                },
+                                {
+                                    "index": 3,
+                                    "image": "base64",
+                                },
+                                {
+                                    "index": 4,
+                                    "image": "base64",
+                                },
+                                {
+                                    "index": 5,
+                                    "image": "base64",
+                                },
+                                {
+                                    "index": 6,
+                                    "image": "base64",
+                                },
+                                {
+                                    "index": 7,
+                                    "image": "base64",
+                                },
+                                {
+                                    "index": 8,
+                                    "image": "base64",
+                                },
+                                {
+                                    "index": 9,
+                                    "image": "base64",
+                                },
+                                {
+                                    "index": 10,
+                                    "image": "base64",
+                                }
+                            ]
+                        },
+                        "sinyalement": {
+                            "skin_color": 1,
+                            "hair_color": 1,
+                            "hair_type": 1,
+                            "eyes_color": 1,
+                            "eyes": 1,
+                            "tooth": 1,
+                            "body": 1,
+                            "face_type": 1,
+                            "head_type": 1,
+                            "forehead_type": 1,
+                            "nose_type": 1,
+                            "lips_type": 1,
+                            "chin_type": 1,
+                            "ear_type": 1,
+                            "height": 170,
+                            "weight": 170,
+                            "blood_type": "A"
+                            "tatto": "None"
+                            "handicaps": "None"
+                        }
+                    },
+                    "schedule": [
+                        {
+                            "polda_id": 1,
+                            "date": "2023-03-13T04:47:46.388+00:00",
+                            "description": "Pembuatan SKCK",
+                            "polda_name": "POLRES Aceh",
+                            "status": 1
+                        }
+                    ],
+                }
+            }
